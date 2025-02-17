@@ -5,6 +5,8 @@ Assignment:     Research Project
 Date:           February 12, 2025
 
 Implementation of foward-checking algorithm to solve the Parks problem.
+
+NOTE only works for one tree
 """
 
 import copy
@@ -20,7 +22,6 @@ Output: solution = {{()}, ..., {()}}
 constraints handled in constraint_propogation()
 """
 def start_search(variables, domains, n):
-    # choose initial next_var based on shortest domain...
     done = set()
     return foward_checking(variables, domains, n, done, pick_next_var(variables, domains, n, done))
 

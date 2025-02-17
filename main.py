@@ -25,6 +25,7 @@ def main():
 
 
 """
+used in get_problem_instances()... makes it easier to input game board data
 """
 def read_colors(colors: str, n: int) -> dict:
     colors_dict = dict()
@@ -43,6 +44,7 @@ def read_colors(colors: str, n: int) -> dict:
 
 
 """
+generates instances for level 1 (n=5), level 10 (n=6), and level 14 (n=7)
 """
 def get_problem_instances() -> list:
     probs = []
@@ -104,6 +106,7 @@ def get_problem_instances() -> list:
 
 
 """
+prints a board-looking solution, instead of just coordinates
 """
 def print_board(solution: set, colors: dict) -> None:
     s = ""
