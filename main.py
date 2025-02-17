@@ -11,9 +11,8 @@ domains = [{(0, 0), ..., (0, n-1)}, ..., {(n-1, 0), ..., (n-1, n-1)}, # rows
 """
 def main():
     problem_instances = get_problem_instances()
+    print()
     for instance in problem_instances:
-        # print()
-        # print(instance[0])
         start = time.perf_counter()
         solution = fc.start_search(instance[1], instance[2], instance[0])
         end = time.perf_counter()
