@@ -13,13 +13,18 @@ def main():
     problem_instances = get_problem_instances()
     print()
     for instance in problem_instances:
+        n = instance[0]
+        num_trees = instance[1]
+        variables = instance[2]
+        domains = instance[3]
+        colors = instance[4]
         start = time.perf_counter()
-        solution = fc.start_search(instance[1], instance[2], instance[0])
+        solution = fc.start_search(n, num_trees, variables, domains)
         end = time.perf_counter()
         print(f"solution = {solution}")
         print(f"{end-start:0.6f}s")
         print()
-        print_board(solution, instance[3])
+        print_board(solution, colors)
         print()
 
 
@@ -44,11 +49,13 @@ def read_colors(colors: str, n: int) -> dict:
 
 """
 generates instances for level 1 (n=5), level 10 (n=6), and level 14 (n=7)
+(n, num_trees, variables, domains, colors)
 """
 def get_problem_instances() -> list:
     probs = []
     # LEVEL 1
     n = 5
+    num_trees = 1
     variables = [i for i in range(0, 3*n)]
     # print(variables)
     domains = [{(i, j) for j in range(0, n)} for i in range(0, n)] # rows
@@ -63,13 +70,16 @@ def get_problem_instances() -> list:
     colors = read_colors(s, n)
     domains.extend(list(colors.values()))
     # print(domains)
-    probs.append((n, variables, domains, colors))
+    probs.append((n, num_trees, variables, domains, colors))
     # LEVEL 10
     n = 6
+    num_trees = 1
     variables = [i for i in range(0, 3*n)]
     # print(variables)
     domains = [{(i, j) for j in range(0, n)} for i in range(0, n)] # rows
     domains.extend([{(j, i) for j in range(0, n)} for i in range(0, n)]) # columns
+    # domains = [{(i, j, False) for j in range(0, n)} for i in range(0, n)] # rows
+    # domains.extend([{(j, i, False) for j in range(0, n)} for i in range(0, n)]) # columns
     s = """
     B B V V V V
     B V V G M V
@@ -81,13 +91,16 @@ def get_problem_instances() -> list:
     colors = read_colors(s, n)
     domains.extend(list(colors.values()))
     # print(domains)
-    probs.append((n, variables, domains, colors))
+    probs.append((n, num_trees, variables, domains, colors))
     # LEVEL 14
     n = 7
+    num_trees = 1
     variables = [i for i in range(0, 3*n)]
     # print(variables)
     domains = [{(i, j) for j in range(0, n)} for i in range(0, n)] # rows
     domains.extend([{(j, i) for j in range(0, n)} for i in range(0, n)]) # columns
+    # domains = [{(i, j, False) for j in range(0, n)} for i in range(0, n)] # rows
+    # domains.extend([{(j, i, False) for j in range(0, n)} for i in range(0, n)]) # columns
     s = """
     B B B B V V V
     B B G B M M V
@@ -100,7 +113,29 @@ def get_problem_instances() -> list:
     colors = read_colors(s, n)
     domains.extend(list(colors.values()))
     # print(domains)
-    probs.append((n, variables, domains, colors))
+    probs.append((n, num_trees, variables, domains, colors))
+    # LEVEL 15
+    n = 9
+    num_trees = 1
+    variables = [i for i in range(0, 3*n)]
+    # print(variables)
+    domains = [{(i, j) for j in range(0, n)} for i in range(0, n)] # rows
+    domains.extend([{(j, i) for j in range(0, n)} for i in range(0, n)]) # columns
+    s = """
+    B B B B B B B B B
+    V V B B G B G G M
+    V V V G G G G M M
+    V V V Y Y P M M M
+    V V V V Y P P P M
+    V D Y Y Y L P P M
+    D D D L L L P P M
+    D D F F F L L P P
+    D D F F F F L P P
+    """
+    colors = read_colors(s, n)
+    domains.extend(list(colors.values()))
+    # print(domains)
+    probs.append((n, num_trees, variables, domains, colors))
     return probs
 
 
@@ -126,4 +161,3 @@ def print_board(solution: set, colors: dict) -> None:
 
 if __name__ == "__main__":
     main()
-
