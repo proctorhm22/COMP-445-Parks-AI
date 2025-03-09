@@ -4,48 +4,39 @@ Assignment:     COMP 445 Research Project
 Date:           March 10, 2025
 
 Implementation of a foward-checking algorithm to solve Parks problem instances (1-2 trees).
-
-Input:  variables = {x1, x2, ..., xn}
-        domains = {d1, d2, ..., dn}
-        n = board.size
-        done = {...}
-        0 <= next_var <= 3n-1
-
-Output: solution = {{()}, ..., {()}}
-        None if no solution is found
-
 """
 
 import copy
-from main import Park
+from park import Park
 
-def start_search(park: Park):
+def start_search(park: Park, verbosity=0):
     done = set()
-    num_nodes_explored = 0
+    # num_nodes_explored = 0
     return foward_checking(park.n, park.num_trees, park.variables, park.domains, done, 
-                           pick_next_var(park.n, park.variables, park.domains, done), num_nodes_explored)
+                           pick_next_var(park.n, park.variables, park.domains, done), park, 
+                           verbosity)
 
 
-"""
-0 <= next_var <= 3n-1
-choose next_var based on shortest domain
-"""
-def foward_checking(n, num_trees, variables, domains, done, next_var, num_nodes_explored):
+def foward_checking(n, num_trees, variables, domains, done, next_var, park, verbosity):
     # if len(done) == len(variables): return domains
     if len(done) == 3*n:
-        return [domain.pop() for domain in domains[0:n]], num_nodes_explored
+        if verbosity > 0:
+            print()
+        return [domain.pop() for domain in domains[0:n]], park.num_nodes_explored
     # else: run through values in domains[next_var]
-    # print(f"next_var = {next_var}")
     values_to_try = domains[next_var]
     # print(f"values_to_try = {values_to_try}")
     for value in values_to_try:
-        num_nodes_explored = num_nodes_explored + 1
-        # print(f"value = {value}")
+        park.num_nodes_explored = park.num_nodes_explored + 1
+        if verbosity > 0:
+            print(f"next_var = {next_var}")
+            print(f"\ttry {value}; {park.num_nodes_explored} nodes explored")
         new_domains = copy.copy(domains)
         # new_domains[next_var] = {value}
-        # print(f"domains = {domains}")
         new_domains = constraint_propogation(n, num_trees, variables, new_domains, value)
-        # print(f"new_domains = {new_domains}")
+        if verbosity == 2:
+            print(f"domains = {domains}")
+            print(f"new_domains = {new_domains}")
         # if new_domains has no empty domains: ...
         noEmptyDomains = True
         for domain in new_domains:
@@ -59,10 +50,13 @@ def foward_checking(n, num_trees, variables, domains, done, next_var, num_nodes_
             new_done.add(next_var)
             # print(f"new_done = {done}")
             result = foward_checking(n, num_trees, variables, new_domains, new_done, 
-                                     pick_next_var(n, variables, new_domains, new_done), num_nodes_explored) 	
+                                     pick_next_var(n, variables, new_domains, new_done), park,
+                                       verbosity) 	
             if result is not None:
                 return result
     # tried all consistent values and none worked
+    if verbosity > 0:
+        print(f"backtrack [{next_var}]")
     return None
 
 
