@@ -1,9 +1,14 @@
 """
-Authors:    Jacob Huber / Hannah Proctor
-Assignment: COMP 445 Research Project
-Date:       March 10, 2025
+Authors:        Jacob Huber / Hannah Proctor
+Assignment:     COMP 445 Research Project
+Date:           March 10, 2025
 
-Generates / solves Parks problem instances from Logic Games app.
+Generates problem instances from Logic Games app and calls algorithm implementations to compare results.
+
+5.	Metrics for evaluation will include:
+    a.  Run time
+    b.	Number of nodes explored (trees placed)
+
 """
 
 import foward_checking as fc
@@ -15,16 +20,12 @@ class Park():
         self.n = n
         self.num_trees = num_trees
         self.variables = [i for i in range(0, 3*n)]
-        # self.variables = [(i, j) for i in range(0, n) for j in range (0, n)]
-        # print(self.variables)
-        self.colors = read_colors(color_str, n) 
-        # print(self.colors)
+        self.colors = read_colors(color_str, n)
         self.domains = [{(i, j) for j in range(0, n)} for i in range(0, n)] # rows
-        self.domains.extend([{(j, i) for j in range(0, n)} for i in range(0, n)]) # columns
+        self.domains.extend([{(i, j) for i in range(0, n)} for j in range(0, n)]) # columns
         self.domains.extend(list(self.colors.values())) # colors
-        # self.domains = {(i, j): {True, False} for (i, j) in self.variables}
-        # print(self.domains)
         self.solution = None
+        self.num_nodes_explored = 0
     def __str__(self):
         s = ""
         for i in range(0, self.n):
@@ -34,7 +35,6 @@ class Park():
                     if (i, j) in self.colors[color]:
                         k = color
                 if self.solution != None and (i, j) in self.solution:
-                # if self.domains.get((i, j)) == {True}:
                     s = s + f"{k} TREE\t"
                 else:
                     s = s + f"{k} ....\t"
@@ -114,16 +114,30 @@ def main():
     T G T G G P P P D
     G G G G G G D D D
     """))
+    # level 30 took me an hour to solve... 
+    parks.append(Park(level="LEVEL 30", n=10, num_trees=2, color_str="""
+    B B B B B V V G G G
+    B M Y Y P P V V V G
+    B M Y Y P P V V V G
+    D M Y Y P P V V V L
+    D M D O P P L L L L
+    D M D O P P L T T T
+    D M D O P P L T T T
+    D M D O O O L T T T
+    D M D D O O L O O T
+    D D D D D O O O T T
+    """))
     for park in parks:
         print(f"\n{park.level}\n")
         start = time.perf_counter()
-        park.solution = fc.start_search(park.n, park.num_trees, park.variables, park.domains)
+        park.solution, num_nodes_explored = fc.start_search(park)
         end = time.perf_counter()
         print(park.solution)
+        print(num_nodes_explored)
         print(f"{end-start:0.6f}s")
         print(f"\n{park}\n")
     print()
-
+           
 
 if __name__ == "__main__":
     main()
