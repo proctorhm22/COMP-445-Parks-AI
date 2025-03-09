@@ -3,14 +3,7 @@ Authors:        Jacob Huber / Hannah Proctor
 Assignment:     COMP 445 Research Project
 Date:           March 10, 2025
 
-Generates problem instances from Logic Games app and calls algorithm implementations to compare results.
-
-Metrics for evaluation: run time / number of nodes explored. 
-
-verbosity:  0 no added print statements (default)
-            1 print next_var, each value that gets tried, and num_nodes explored 
-            2 print domains and new_domains after constraint propogation
-
+Generates problem instances (from Logic Games app) and calls algorithm implementations to compare results.
 """
 
 import foward_checking as fc
@@ -18,7 +11,8 @@ import time
 from park import Park
 
 def main():
-    parks = []
+    # generate list of problem instances
+    parks: list[Park] = []
     parks.append(Park(level="LEVEL 1", n=5, num_trees=1, color_str="""
     B B V G M
     B B V V M
@@ -64,7 +58,7 @@ def main():
     T G T G G P P P D
     G G G G G G D D D
     """))
-    # level 30 took me an hour to solve... 
+    # level 30 took me an hour to solve on my own...
     parks.append(Park(level="LEVEL 30", n=10, num_trees=2, color_str="""
     B B B B B V V G G G
     B M Y Y P P V V V G
@@ -77,14 +71,26 @@ def main():
     D M D D O O L O O T
     D D D D D O O O T T
     """))
+    # loop through problem instances / call algorithm implementations and compare results
     for park in parks:
         print(f"\n{park.level}\n")
+        print("Foward checking...\n")
         start = time.perf_counter()
         park.solution, num_nodes_explored = fc.start_search(park, 0)
         end = time.perf_counter()
-        print(park.solution)
+        # list of tree locations
+        print(f"{park.solution}")
+        # number of nodes explored
         print(f"{num_nodes_explored} nodes explored")
+        # run time
         print(f"{end-start:0.6f}s")
+        print("\nFoward checking with constraint learning...")
+        # list of tree locations
+        # ...
+        # number of nodes explored
+        # ...
+        # run time
+        # ...
         print(f"\n{park}\n")
     print()
            

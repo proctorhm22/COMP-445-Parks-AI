@@ -4,19 +4,45 @@ Assignment:     COMP 445 Research Project
 Date:           March 10, 2025
 
 Implementation of Park class to represent problem instances.
+
+Variables: {
+            0, ..., n-1,        // rows [0, n)
+            n, ..., 2*n-1,      // columns [n, 2*n)
+            2*n, ..., 3*n-1     // colors [2*n, 3*n)
+        } 
+
+Domains: {
+            {(0,0), (0,1), ..., (0,n-1)}, ..., {(n-1,0), (n-1,1), ..., (n-1,n-1)},  // rows
+            {(0,0), (1,0), ..., (n-1,0)}, ..., {(0,n-1), (1,n-1), ..., (n-1,n-1)},  // columns
+            {(i,j) | (i,j) is blue}, ..., {(i,j) | (i,j) is gray}                   // colors
+        }
+
+**Constraints are hard-coded into algorithm implementations, and are not included in class instances. That said,
+
+Constraints:    Exactly num_trees trees in each row, column, and color. 
+                Trees cannot be placed adjacently (all surrounding cells blocked off).
+
 """
 
 class Park():
     def __init__(self, level, n, num_trees, color_str):
+        # set level (from the Logic Games app), e.g. "LEVEL 1"
         self.level = level
+        # set size of board 
         self.n = n
+        # set number of trees (varies 1-2)
         self.num_trees = num_trees
+        # get color_dict from color_str
         self.colors = read_colors(color_str, n)
+        # see variable assignment above
         self.variables = [i for i in range(0, 3*n)]
+        # see domain assignment above
         self.domains = [{(i, j) for j in range(0, n)} for i in range(0, n)] # rows
         self.domains.extend([{(i, j) for i in range(0, n)} for j in range(0, n)]) # columns
         self.domains.extend(list(self.colors.values())) # colors
+        # solution defaults to None
         self.solution = None
+        # num_nodes_explored defaults to zero
         self.num_nodes_explored = 0
     def __str__(self):
         s = ""
