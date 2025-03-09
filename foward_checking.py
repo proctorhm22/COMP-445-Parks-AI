@@ -4,6 +4,8 @@ Assignment:     COMP 445 Research Project
 Date:           March 10, 2025
 
 Implementation of a foward-checking algorithm to solve Parks problem instances (1-2 trees).
+
+Used pseudocode from class slides.
 """
 
 import copy
