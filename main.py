@@ -74,19 +74,19 @@ def main():
     """))
     # parks.append(Park(level="LEVEL 35", n=11, num_trees=2, color_str="""
     # """))
-    # parks.append(Park(level="LEVEL 38", n=11, num_trees=2, color_str="""
-    # B B B B V V V V G G G
-    # B B B B V V V G G G G
-    # M M B Y V P V G G G G
-    # M M M Y P P P G G G G
-    # M M M Y Y Y Y D D D L
-    # M M M Y Y D Y D L L L
-    # M F M F F D D D L D L
-    # F F F F F D D D D D L
-    # F F F F F F F F D O L
-    # F F F W W D D D D O O
-    # F F W W W D D D D D O
-    # """))
+    parks.append(Park(level="LEVEL 38", n=11, num_trees=2, color_str="""
+    B B B B V V V V G G G
+    B B B B V V V G G G G
+    M M B Y V P V G G G G
+    M M M Y P P P G G G G
+    M M M Y Y Y Y D D D L
+    M M M Y Y D Y D L L L
+    M F M F F D D D L D L
+    F F F F F D D D D D L
+    F F F F F F F F D O L
+    F F F W W D D D D O O
+    F F W W W D D D D D O
+    """))
     parks.append(Park(level="LEVEL 41", n=12, num_trees=2, color_str="""
     B B V V G G G G G G G G
     B B V V G G G G G G G M
@@ -113,7 +113,7 @@ def main():
         # number of nodes explored
         print(f"{park.num_nodes_explored} nodes explored")
         # run time
-        print(f"{end-start:0.6f}s")
+        print(f"{(end-start):0.6f}ms")
         print("\nForward checking with constraint learning...\n")
         start = time.perf_counter()
         park.solution = cl.start_learning_search(park, 0)
@@ -123,8 +123,8 @@ def main():
         # number of nodes explored
         print(f"{park.num_nodes_explored} nodes explored")
         # run time
-        print(f"{end-start:0.6f}s")
-        print(f"\n{park}\n")
+        print(f"{(end-start)*1000:f}ms")
+        #print(f"\n{park}\n")
     print()
            
 
