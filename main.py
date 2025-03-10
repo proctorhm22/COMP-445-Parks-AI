@@ -71,6 +71,46 @@ def main():
     D M D D O O L O O T
     D D D D D O O O T T
     """))
+    parks.append(Park(level="LEVEL 34", n=11, num_trees=2, color_str="""
+    B B B B B G G G R R R
+    B V B B B G R R R R R
+    B V Y Y Y Y Y R P R P
+    B V V V Y Y P P P P P
+    B V V V V V V P P P P
+    T V V V V V V P P P P
+    T L L L L L L P P M P
+    T L L L L O O M M M P
+    T T T L O O O Q M M M
+    T T T L O O O Q Q M M
+    T T T O O O O O Q M M
+    """))
+    parks.append(Park(level="LEVEL 35", n=11, num_trees=2, color_str="""
+    B B B B V V V V G G G
+    B B B B V V V G G G G
+    M M B Y V P V G G G G
+    M M M Y P P P G G G G
+    M M M Y Y Y Y D D D L
+    M M M Y Y D Y D L L L
+    M F M F F D D D L D L
+    F F F F F D D D D D L
+    F F F F F F F F D O L
+    F F F W W D D D D O O
+    F F W W W D D D D D O
+    """))
+    parks.append(Park(level="LEVEL 37", n=11, num_trees=2, color_str="""
+    B B B B B B B G G G A
+    B B B B B B B A A A A
+    B B B B B B A A A V V
+    B B Y Y V V V V V V V
+    Y Y Y Y P V V V V V T
+    Y Y Y P P P V V V T T
+    Y Y Y P P P V T T T T
+    Y Y W P P P P T T T M
+    W W W W O O T T T M M
+    Q Q W W O O O M M M M
+    Q Q Q W O O O M M M M
+                    
+    """))
     parks.append(Park(level="LEVEL 38", n=11, num_trees=2, color_str="""
     B B V V V G G G G G G
     B B V V V V G G G G G
@@ -110,7 +150,7 @@ def main():
         # number of nodes explored / trees placed
         print(f"{park.num_nodes_explored} nodes explored")
         # run time
-        print(f"{end-start:0.6f}s")
+        print(f"{(end-start)*1000:f}ms")
         print("\nForward checking with constraint learning...\n")
         start = time.perf_counter()
         park.solution = cl.start_learning_search(park, 0)
@@ -120,7 +160,7 @@ def main():
         # number of nodes explored / trees placed
         print(f"{park.num_nodes_explored} nodes explored")
         # run time
-        print(f"{end-start:0.6f}s")
+        print(f"{(end-start)*1000:f}ms")
         # print(f"\n{park}\n")
     print()
            
