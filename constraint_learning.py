@@ -7,7 +7,11 @@ Implementation of foward-checking algorithm to solve Parks problem instances wit
 the forward checking algorithm and uses a modified implementation of constraint learning.
 
 Additional constraints are "learned" by relating variables in a subtree.
-The base is determined o consistent children and a "base" o
+The base of a subtree is determined if that node is exploring at least its second child.
+The end of a subtree is determined if that node has no consistent children.
+
+Code was inspired by this Wikipedia article on constraint learning:
+https://en.wikipedia.org/wiki/Constraint_learning
 """
 
 # TODO: get 2-tree implementation working
@@ -41,12 +45,13 @@ def learning_forward_checking(n: int, num_trees: int, variables: set, domains: l
             # print()
         # return solution
         return [domain.pop() for domain in domains[0:n]]
-    # else: assign value to next_var# check if current variables violate a learned constraint
+    # else: assign value to next_var
+    # check if current variables violate a learned constraint
     if len(learning) != 0 and prev_var != None:
         for x in range(len(domains)):
             if(len(domains[x]) == 1):
                 if verbosity > 1:
-                    print("we are checking if this is in the thing: " + str(((x, copy.copy(domains[x]).pop()), (prev_var, copy.copy(domains[prev_var]).pop()))))
+                    print("Checking variable pair: " + str(((x, copy.copy(domains[x]).pop()), (prev_var, copy.copy(domains[prev_var]).pop()))))
                 if ((x, copy.copy(domains[x]).pop()), (prev_var, copy.copy(domains[prev_var]).pop())) in learning:
                     if verbosity > 0:
                         print("I LEARNED SOMETHING")
@@ -91,15 +96,14 @@ def learning_forward_checking(n: int, num_trees: int, variables: set, domains: l
             if result is not None:
                 return result
     # tried all consistent values and none worked
+    # add new pair of inconsistent variables
     if verbosity > 0:
         print(f"backtrack [{next_var}]")
     if verbosity > 1:
-        print("this is a learned constraint: " + str(((base_var,copy.copy(domains[base_var]).pop()),(prev_var,copy.copy(domains[prev_var]).pop()))))
-        print("this is also a learned constraing: " + str(((prev_var,copy.copy(domains[prev_var]).pop()),(base_var,copy.copy(domains[base_var]).pop()))))
+        print("This is a learned constraint: " + str(((base_var,copy.copy(domains[base_var]).pop()),(prev_var,copy.copy(domains[prev_var]).pop()))))
+        print("This is the learned constraint but backwards: " + str(((prev_var,copy.copy(domains[prev_var]).pop()),(base_var,copy.copy(domains[base_var]).pop()))))
     learning.add(((base_var,copy.copy(domains[base_var]).pop()),(prev_var,copy.copy(domains[prev_var]).pop())))
     learning.add(((prev_var,copy.copy(domains[prev_var]).pop()),(base_var,copy.copy(domains[base_var]).pop())))
-    #learning.add(((base_var,(copy.copy(domains[base_var]).pop()[1],copy.copy(domains[base_var]).pop()[0])),(prev_var,(copy.copy(domains[prev_var]).pop()[1],copy.copy(domains[prev_var]).pop()[0]))))
-    #learning.add((prev_var,(copy.copy(domains[prev_var]).pop()[1],copy.copy(domains[prev_var]).pop()[0]))),((base_var,(copy.copy(domains[base_var]).pop()[1],copy.copy(domains[base_var]).pop()[0])))
     return None
 
 
