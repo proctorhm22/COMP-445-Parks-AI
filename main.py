@@ -7,6 +7,7 @@ Generates problem instances (from Logic Games app) and calls algorithm implement
 """
 
 import foward_checking as fc
+import constraint_learning as cl
 import time
 from park import Park
 
@@ -71,6 +72,20 @@ def main():
     D M D D O O L O O T
     D D D D D O O O T T
     """))
+    parks.append(Park(level="LEVEL 41", n=12, num_trees=2, color_str="""
+    B B V V G G G G G G G G
+    B B V V G G G G G G G M
+    B B V V V Y G G G M M M
+    B B V V V Y G G M M M M
+    B B V V V Y Y M M M M M
+    B P P D D D D D M L M M
+    P P P D D D D L L L L L
+    P P P P D D D L L L L F
+    P P P P O O L L W W W F
+    P P P O O O W W W W F F
+    P P P P O O W W W W F F
+    P P P O O O O T T T F F
+    """))
     # loop through problem instances / call algorithm implementations and compare results
     for park in parks:
         print(f"\n{park.level}\n")
@@ -85,12 +100,15 @@ def main():
         # run time
         print(f"{end-start:0.6f}s")
         print("\nFoward checking with constraint learning...")
+        start = time.perf_counter()
+        park.solution, num_nodes_explored = cl.start_learning_search(park, 0)
+        end = time.perf_counter()
         # list of tree locations
-        # ...
+        print(f"{park.solution}")
         # number of nodes explored
-        # ...
+        print(f"{num_nodes_explored} nodes explored")
         # run time
-        # ...
+        print(f"{end-start:0.6f}s")
         print(f"\n{park}\n")
     print()
            

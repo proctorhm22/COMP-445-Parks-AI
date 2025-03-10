@@ -44,6 +44,12 @@ class Park():
         self.solution = None
         # num_nodes_explored defaults to zero
         self.num_nodes_explored = 0
+        # create a set of learned constraints
+        self.learning = set()
+        # determine the first var of a subset to add to learned constraints
+        self.base_var = None
+        # determine the second var of a subset to add to learnd constraints
+        self.prev_var = None
     def __str__(self):
         s = ""
         for i in range(0, self.n):
