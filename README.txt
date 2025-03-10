@@ -44,5 +44,3 @@ column, and the rest in the color. From what's left, decide where to put the nex
 
                 Y ....  Y ....  Y ____  Y ____  Y ....
 
-
-                (...)
