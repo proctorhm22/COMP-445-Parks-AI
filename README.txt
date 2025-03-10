@@ -22,4 +22,7 @@ verbosity:  0 no additional print statements
                     explored node; identifies if / how program backtracks
             2 print (1) along with domains and new_domains after each call to constraint propogation
 
+FORWARD_CHECKING() instructions:
+        - I'd use level 1
+
             

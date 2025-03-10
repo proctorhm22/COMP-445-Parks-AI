@@ -73,8 +73,6 @@ def main():
     D D D D D O O O T T
     """))
     # parks.append(Park(level="LEVEL 35", n=11, num_trees=2, color_str="""
-    # """))
-    # parks.append(Park(level="LEVEL 38", n=11, num_trees=2, color_str="""
     # B B B B V V V V G G G
     # B B B B V V V G G G G
     # M M B Y V P V G G G G
@@ -87,6 +85,19 @@ def main():
     # F F F W W D D D D O O
     # F F W W W D D D D D O
     # """))
+    parks.append(Park(level="LEVEL 38", n=11, num_trees=2, color_str="""
+    B B V V V G G G G G G
+    B B V V V V G G G G G
+    B B V V V G G G G G G
+    B B V M M G G G G G Y
+    P M M M M D D D Y Y Y
+    P P M M L L F D Y Y Y
+    P P P L L L F F F Y Y
+    P P L L L L F F F Y Y
+    P P L L L L O O O O Y
+    L L L L L L O O O O O
+    L L L L L L O T T T T
+    """))
     parks.append(Park(level="LEVEL 41", n=12, num_trees=2, color_str="""
     B B V V G G G G G G G G
     B B V V G G G G G G G M
