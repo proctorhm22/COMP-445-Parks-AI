@@ -34,7 +34,7 @@ def learning_forward_checking(n: int, num_trees: int, variables: set, domains: l
     if len(done) == 3*n:
         if verbosity > 0:
             print()
-        return [domain.pop() for domain in domains[0:n]], park.num_nodes_explored
+        return [domain.pop() for domain in domains[0:n]]
     # check if current variables violate a learned constraint
     if len(learning) != 0 and prev_var != None:
         for x in range(len(domains)):

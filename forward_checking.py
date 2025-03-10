@@ -3,7 +3,7 @@ Author:         Hannah Proctor
 Assignment:     COMP 445 Research Project
 Date:           March 10, 2025
 
-Implementation of foward-checking algorithm to solve Parks problem instances (1-2 trees).** Pseudocode inspiration 
+Implementation of forward-checking algorithm to solve Parks problem instances (1-2 trees).** Pseudocode inspiration 
 taken from class slides.
 
 **Currently, all 2-tree problems are solved as if they are 1-tree problems. 
@@ -11,7 +11,7 @@ taken from class slides.
 
 # TODO: get 2-tree implementation working
 
-# TODO: adjust comments in foward_checking() to better align with pseudocode
+# TODO: adjust comments in forward_checking() to better align with pseudocode
 
 import copy
 from park import Park
@@ -20,11 +20,11 @@ def start_search(park: Park, verbosity=0):
     # set of variables currently assigned
     done = set()
     park.num_nodes_explored = 0
-    return foward_checking(park.n, park.num_trees, park.variables, park.domains, done, 
+    return forward_checking(park.n, park.num_trees, park.variables, park.domains, done, 
                             pick_next_var(park.n, park.variables, park.domains, done), park, 
                                 verbosity)
 
-def foward_checking(n: int, num_trees: int, variables: set, domains: list, done: set, next_var: int, park: Park, 
+def forward_checking(n: int, num_trees: int, variables: set, domains: list, done: set, next_var: int, park: Park, 
                         verbosity: int):
     # if each domain in domains has size 1 (num_trees): return solution
     all_assigned = True
@@ -75,7 +75,7 @@ def foward_checking(n: int, num_trees: int, variables: set, domains: list, done:
                 if len(new_domains[k]) == 1 and new_domains[k] == {value}:
                     new_done.add(k)
             # make recursive call
-            result = foward_checking(n, num_trees, variables, new_domains, new_done, 
+            result = forward_checking(n, num_trees, variables, new_domains, new_done, 
                                      pick_next_var(n, variables, new_domains, new_done), park,
                                        verbosity) 	
             if result is not None:

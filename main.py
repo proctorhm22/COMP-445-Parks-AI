@@ -6,7 +6,7 @@ Date:           March 10, 2025
 Generates problem instances (from Logic Games app) and calls algorithm implementations to compare results.
 """
 
-import foward_checking as fc
+import forward_checking as fc
 import constraint_learning as cl
 import time
 from park import Park
@@ -72,6 +72,21 @@ def main():
     D M D D O O L O O T
     D D D D D O O O T T
     """))
+    # parks.append(Park(level="LEVEL 35", n=11, num_trees=2, color_str="""
+    # """))
+    # parks.append(Park(level="LEVEL 38", n=11, num_trees=2, color_str="""
+    # B B B B V V V V G G G
+    # B B B B V V V G G G G
+    # M M B Y V P V G G G G
+    # M M M Y P P P G G G G
+    # M M M Y Y Y Y D D D L
+    # M M M Y Y D Y D L L L
+    # M F M F F D D D L D L
+    # F F F F F D D D D D L
+    # F F F F F F F F D O L
+    # F F F W W D D D D O O
+    # F F W W W D D D D D O
+    # """))
     parks.append(Park(level="LEVEL 41", n=12, num_trees=2, color_str="""
     B B V V G G G G G G G G
     B B V V G G G G G G G M
@@ -89,7 +104,7 @@ def main():
     # loop through problem instances / call algorithm implementations and compare results
     for park in parks:
         print(f"\n{park.level}\n")
-        print("Foward checking...\n")
+        print("Forward checking...\n")
         start = time.perf_counter()
         park.solution = fc.start_search(park, 0)
         end = time.perf_counter()
@@ -99,14 +114,14 @@ def main():
         print(f"{park.num_nodes_explored} nodes explored")
         # run time
         print(f"{end-start:0.6f}s")
-        print("\nFoward checking with constraint learning...\n")
+        print("\nForward checking with constraint learning...\n")
         start = time.perf_counter()
-        park.solution, num_nodes_explored = cl.start_learning_search(park, 0)
+        park.solution = cl.start_learning_search(park, 0)
         end = time.perf_counter()
         # list of tree locations
         print(f"{park.solution}")
         # number of nodes explored
-        print(f"{num_nodes_explored} nodes explored")
+        print(f"{park.num_nodes_explored} nodes explored")
         # run time
         print(f"{end-start:0.6f}s")
         print(f"\n{park}\n")
