@@ -1,5 +1,5 @@
 """
-Author:         Hannah Proctor
+Author:         Jacob Huber / Hannah Proctor
 Assignment:     COMP 445 Research Project
 Date:           March 10, 2025
 
