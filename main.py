@@ -134,7 +134,7 @@ def main():
         # number of nodes explored
         print(f"{park.num_nodes_explored} nodes explored")
         # run time
-        print(f"{(end-start)*1000:f}s")
+        print(f"{(end-start)*1000:f}ms")
         # print(f"\n{park}\n")
     print()
            
