@@ -3,14 +3,13 @@ Author:         Jacob Huber
 Assignment:     COMP 445 Research Project
 Date:           March 10, 2025
 
-Implementation of foward-checking algorithm to solve Parks problem instances with 1-2 trees**. Code is based on
-the forward checking algorithm and uses a modified implementation of constraint learning.
+Implementation of constraint_learning algorithm to solve Parks problem instances. Code is based on the forward 
+checking algorithm and uses a modified implementation of constraint learning.
 
 Additional constraints are "learned" by relating variables in a subtree.
+
 The base is determined o consistent children and a "base" o
 """
-
-# TODO: get 2-tree implementation working
 
 import copy
 from park import Park

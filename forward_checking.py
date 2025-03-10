@@ -3,11 +3,9 @@ Author:         Hannah Proctor
 Assignment:     COMP 445 Research Project
 Date:           March 10, 2025
 
-Implementation of forward-checking algorithm to solve Parks problem instances (1-2 trees).** Pseudocode inspiration 
+Implementation of forward-checking algorithm to solve Parks problem instances. Pseudocode inspiration 
 taken from class slides.
 """
-
-# TODO: get 2-tree implementation working
 
 import copy
 from park import Park

@@ -22,7 +22,14 @@ verbosity:  0 no additional print statements
                     explored node; identifies if / how program backtracks
             2 print (1) along with domains and new_domains after each call to constraint propogation
 
-FORWARD_CHECKING() instructions:
-        - I'd use level 1
+Running problem instance with forward_checking... 
+        - Place a tree in the color with fewest cells (this is always the starting point).
+        - Block out the rest of the row / column / color and all surrounding cells.
+        - Given the remaining options, find the variable (row, column, or color) with the MRV.
+        - Get list of values you could assign to that variable.
+        - LOOP: pick a value, (i, j)
+                place a tree
+                block out the rest of the row / column / color and all surrounding cells.
+                if empty domain, backtrack
+                else, pick next_var
 
-            

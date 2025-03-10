@@ -59,7 +59,6 @@ def main():
     T G T G G P P P D
     G G G G G G D D D
     """))
-    # level 30 took me an hour to solve on my own...
     parks.append(Park(level="LEVEL 30", n=10, num_trees=2, color_str="""
     B B B B B V V G G G
     B M Y Y P P V V V G
@@ -108,7 +107,7 @@ def main():
         end = time.perf_counter()
         # list of tree locations
         print(f"{park.solution}")
-        # number of nodes explored
+        # number of nodes explored / trees placed
         print(f"{park.num_nodes_explored} nodes explored")
         # run time
         print(f"{end-start:0.6f}s")
@@ -118,7 +117,7 @@ def main():
         end = time.perf_counter()
         # list of tree locations
         print(f"{park.solution}")
-        # number of nodes explored
+        # number of nodes explored / trees placed
         print(f"{park.num_nodes_explored} nodes explored")
         # run time
         print(f"{end-start:0.6f}s")
