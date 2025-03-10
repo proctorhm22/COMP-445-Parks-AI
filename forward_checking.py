@@ -10,16 +10,18 @@ taken from class slides.
 import copy
 from park import Park
 
-def start_search(park: Park, verbosity=0):
+def start_search(park: Park, verbosity: int = 0) -> list[tuple]:
     # set of variables currently assigned
     done = set()
+    # number of nodes explored / trees placed (initially zero)
     park.num_nodes_explored = 0
+    # returns list of tree locations or None if no solution exists
     return forward_checking(park.n, park.num_trees, park.variables, park.domains, done, 
                             pick_next_var(park.n, park.variables, park.domains, done), park, 
                                 verbosity)
 
 def forward_checking(n: int, num_trees: int, variables: set, domains: list, done: set, next_var: int, park: Park, 
-                        verbosity: int):
+                        verbosity: int) -> list[tuple]:
     # if each domain in domains has size 1 (num_trees): return solution
     all_assigned = True
     for domain in domains:
@@ -81,9 +83,10 @@ def forward_checking(n: int, num_trees: int, variables: set, domains: list, done
 
 
 """
-Strategically picks next variable to try (minimum remaining value).
+Strategically picks next variable to try (minimum remaining value). 
+0 <= next_var <= 3*n - 1
 """
-def pick_next_var(n, variables, domains, done):
+def pick_next_var(n: int, variables: list[int], domains: list[set], done: set) -> int:
     # find first variable that hasn't been assigned
     i = 0
     while variables[i] in done and i < 3*n - 1:
@@ -107,7 +110,7 @@ Runs constraint propogation on domains. Essentally, "placing a tree" at (i, j).
 Constraints:    Exactly num_trees trees in each row, column, and color. 
                 Trees cannot be placed adjacently (all surrounding cells blocked off).
 """
-def constraint_propogation(num_trees, variables, domains, value):
+def constraint_propogation(num_trees: int, variables: list[int], domains: list[set], value: tuple) -> list[set]:
     # value = (i, j)
     i = value[0]
     j = value[1]

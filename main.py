@@ -150,7 +150,7 @@ def main():
         # number of nodes explored / trees placed
         print(f"{park.num_nodes_explored} nodes explored")
         # run time
-        print(f"{(end-start)*1000:f}ms")
+        print(f"{(end-start):0.6f}s")
         print("\nForward checking with constraint learning...\n")
         start = time.perf_counter()
         park.solution = cl.start_learning_search(park, 0)
@@ -160,7 +160,7 @@ def main():
         # number of nodes explored / trees placed
         print(f"{park.num_nodes_explored} nodes explored")
         # run time
-        print(f"{(end-start)*1000:f}ms")
+        print(f"{(end-start):0.6f}s")
         print(f"\n{park}\n")
     print()
            
