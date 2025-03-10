@@ -8,13 +8,9 @@ the forward checking algorithm and uses a modified implementation of constraint 
 
 Additional constraints are "learned" by relating variables in a subtree.
 The base is determined o consistent children and a "base" o
-
-**Currently, all 2-tree problems are solved as if they are 1-tree problems. 
 """
 
 # TODO: get 2-tree implementation working
-
-# TODO: adjust comments in learning_forward_checking() to better align with pseudocode
 
 import copy
 from park import Park

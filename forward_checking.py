@@ -5,13 +5,9 @@ Date:           March 10, 2025
 
 Implementation of forward-checking algorithm to solve Parks problem instances (1-2 trees).** Pseudocode inspiration 
 taken from class slides.
-
-**Currently, all 2-tree problems are solved as if they are 1-tree problems. 
 """
 
 # TODO: get 2-tree implementation working
-
-# TODO: adjust comments in forward_checking() to better align with pseudocode
 
 import copy
 from park import Park
