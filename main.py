@@ -71,6 +71,20 @@ def main():
     D M D D O O L O O T
     D D D D D O O O T T
     """))
+    parks.append(Park(level="LEVEL 41", n=12, num_trees=2, color_str="""
+    B B V V G G G G G G G G
+    B B V V G G G G G G G M
+    B B V V V Y G G G M M M
+    B B V V V Y G G M M M M
+    B B V V V Y Y M M M M M
+    B P P D D D D D M L M M
+    P P P D D D D L L L L L
+    P P P P D D D L L L L F
+    P P P P O O L L W W W F
+    P P P O O O W W W W F F
+    P P P P O O W W W W F F
+    P P P O O O O T T T F F
+    """))
     # loop through problem instances / call algorithm implementations and compare results
     for park in parks:
         print(f"\n{park.level}\n")
