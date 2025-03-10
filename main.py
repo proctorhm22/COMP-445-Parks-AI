@@ -91,7 +91,7 @@ def main():
         print(f"\n{park.level}\n")
         print("Foward checking...\n")
         start = time.perf_counter()
-        park.solution = fc.start_search(park, 1)
+        park.solution = fc.start_search(park, 0)
         end = time.perf_counter()
         # list of tree locations
         print(f"{park.solution}")
@@ -99,7 +99,7 @@ def main():
         print(f"{park.num_nodes_explored} nodes explored")
         # run time
         print(f"{end-start:0.6f}s")
-        print("\nFoward checking with constraint learning...")
+        print("\nFoward checking with constraint learning...\n")
         start = time.perf_counter()
         park.solution, num_nodes_explored = cl.start_learning_search(park, 0)
         end = time.perf_counter()

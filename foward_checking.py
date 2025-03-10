@@ -72,7 +72,7 @@ def foward_checking(n: int, num_trees: int, variables: set, domains: list, done:
             new_done.add(next_var)
             # add variables with size 1 (num_tree) domains to new_done
             for k in variables:
-                if len(new_domains[k]) == 1 and copy.copy(new_domains[k]).pop() == value:
+                if len(new_domains[k]) == 1 and new_domains[k] == {value}:
                     new_done.add(k)
             # make recursive call
             result = foward_checking(n, num_trees, variables, new_domains, new_done, 
